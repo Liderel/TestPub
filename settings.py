@@ -1,0 +1,7 @@
+Mail = 'vamap29113@duscore.com'
+Pass = 'Test00002'
+Name = 'Тест'
+Familiya = 'Тестович'
+ErrorPass = 'Test00003'
+Latinerrorpass = 'Еуые00001'
+Passnobig = 'test00003'
