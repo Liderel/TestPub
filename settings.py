@@ -5,6 +5,7 @@ Familiya = 'Тестович'
 ErrorPass = 'Test00003'
 Latinerrorpass = 'Еуые00001'
 Passnobig = 'test00003'
+newpass = 'Test00004'
 
 
 # """Действующие данные для авторизации в системе"""

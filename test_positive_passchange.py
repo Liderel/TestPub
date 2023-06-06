@@ -42,20 +42,28 @@ def test_pass_change(Rostelecom):
     print(text)
     time.sleep(5)
     soup = BeautifulSoup(text['body'], 'html.parser')
-    soupp = soup.p.text.split(': ')[1].strip().split('.')[0]
-    souppp = list(soupp)
-    print(souppp)
+    delenieotvet = soup.p.text.split(': ')[1].strip().split('.')[0]
+    messaglist = list(delenieotvet)
+    print(messaglist)
 
-    pytest.driver.find_element(By.ID, 'rt-code-0').send_keys(souppp[0])
+    pytest.driver.find_element(By.ID, 'rt-code-0').send_keys(messaglist[0])
 
-    pytest.driver.find_element(By.ID, 'rt-code-1').send_keys(souppp[1])
+    pytest.driver.find_element(By.ID, 'rt-code-1').send_keys(messaglist[1])
 
-    pytest.driver.find_element(By.ID, 'rt-code-2').send_keys(souppp[2])
+    pytest.driver.find_element(By.ID, 'rt-code-2').send_keys(messaglist[2])
 
-    pytest.driver.find_element(By.ID, 'rt-code-3').send_keys(souppp[3])
+    pytest.driver.find_element(By.ID, 'rt-code-3').send_keys(messaglist[3])
 
-    pytest.driver.find_element(By.ID, 'rt-code-4').send_keys(souppp[4])
+    pytest.driver.find_element(By.ID, 'rt-code-4').send_keys(messaglist[4])
 
-    pytest.driver.find_element(By.ID, 'rt-code-5').send_keys(souppp[5])
+    pytest.driver.find_element(By.ID, 'rt-code-5').send_keys(messaglist[5])
 
     time.sleep(15)
+
+    pytest.driver.find_element(By.ID, 'password-new').send_keys(newpass)
+
+    pytest.driver.find_element(By.ID, 'password-confirm').send_keys(newpass)
+
+    pytest.driver.find_element(By.ID, 't-btn-reset-pass').click()
+
+    pytest.driver.find_element(By.ID, 'password').send_keys(newpass)

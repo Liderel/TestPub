@@ -59,7 +59,7 @@ def test_registration(Rostelecom):
 
     messages = response.json()
 
-    time.sleep(15)
+    time.sleep(25)
 
 
     meskey = messages[0]['id']
@@ -72,21 +72,25 @@ def test_registration(Rostelecom):
     print(text)
     time.sleep(5)
     soup = BeautifulSoup(text['body'], 'html.parser')
-    soupp = soup.p.text.split(': ')[1].strip()
-    souppp = list(soupp)
-    print(souppp)
+    delenieotvet = soup.p.text.split(': ')[1].strip()
+    messaglist = list(delenieotvet)
+    print(messaglist)
 
-    pytest.driver.find_element(By.ID, 'rt-code-0').send_keys(souppp[0])
-
-    pytest.driver.find_element(By.ID, 'rt-code-1').send_keys(souppp[1])
-
-    pytest.driver.find_element(By.ID, 'rt-code-2').send_keys(souppp[2])
-
-    pytest.driver.find_element(By.ID, 'rt-code-3').send_keys(souppp[3])
-
-    pytest.driver.find_element(By.ID, 'rt-code-4').send_keys(souppp[4])
-
-    pytest.driver.find_element(By.ID, 'rt-code-5').send_keys(souppp[5])
+    for i, x in enumerate(messaglist):
+        pytest.driver.find_element(By.ID, f'rt-code-{i}').send_keys(x)
+        time.sleep(2)
+    #
+    # pytest.driver.find_element(By.ID, 'rt-code-0').send_keys(messaglist[0])
+    #
+    # pytest.driver.find_element(By.ID, 'rt-code-1').send_keys(messaglist[1])
+    #
+    # pytest.driver.find_element(By.ID, 'rt-code-2').send_keys(messaglist[2])
+    #
+    # pytest.driver.find_element(By.ID, 'rt-code-3').send_keys(messaglist[3])
+    #
+    # pytest.driver.find_element(By.ID, 'rt-code-4').send_keys(messaglist[4])
+    #
+    # pytest.driver.find_element(By.ID, 'rt-code-5').send_keys(messaglist[5])
 
     time.sleep(5)
 

@@ -16,8 +16,8 @@ def Rostelecom():
         EC.presence_of_element_located((By.ID, 'app-header')))
 
     yield
-
-    pytest.driver.quit()
+    #
+    # pytest.driver.quit()
 # #
 # # @pytest.fixture(autouse=True)
 # def EMail():
