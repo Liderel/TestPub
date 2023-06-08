@@ -9,9 +9,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from settings import *
 
-otvetlist = ''
-login = ''
-domain = ''
 
 
 def test_registration(Rostelecom):
@@ -21,7 +18,7 @@ def test_registration(Rostelecom):
     response = requests.get('https://www.1secmail.com/api/v1/?action=genRandomMailbox')
 
     time.sleep(2)
-    #
+
     otvet = response.json()
     otvetlist = otvet[0]
     login = otvetlist.split('@')[0]
@@ -59,7 +56,7 @@ def test_registration(Rostelecom):
 
     messages = response.json()
 
-    time.sleep(15)
+    time.sleep(25)
 
 
     meskey = messages[0]['id']
@@ -72,23 +69,23 @@ def test_registration(Rostelecom):
     print(text)
     time.sleep(5)
     soup = BeautifulSoup(text['body'], 'html.parser')
-    soupp = soup.p.text.split(': ')[1].strip()
-    souppp = list(soupp)
-    print(souppp)
+    delenieotvet = soup.p.text.split(': ')[1].strip()
+    messaglist = list(delenieotvet)
+    print(messaglist)
 
-    pytest.driver.find_element(By.ID, 'rt-code-0').send_keys(souppp[0])
-
-    pytest.driver.find_element(By.ID, 'rt-code-1').send_keys(souppp[1])
-
-    pytest.driver.find_element(By.ID, 'rt-code-2').send_keys(souppp[2])
-
-    pytest.driver.find_element(By.ID, 'rt-code-3').send_keys(souppp[3])
-
-    pytest.driver.find_element(By.ID, 'rt-code-4').send_keys(souppp[4])
-
-    pytest.driver.find_element(By.ID, 'rt-code-5').send_keys(souppp[5])
+    for i, x in enumerate(messaglist):
+        pytest.driver.find_element(By.ID, f'rt-code-{i}').send_keys(x)
 
     time.sleep(5)
+    print(otvet)
 
-    return otvetlist, login, domain
+    return otvet
+
+def test_autorization(Rostelecom):
+    pytest.driver.find_element(By.ID, 't-btn-tab-mail').click()
+    pytest.driver.find_element(By.ID, 'username').send_keys(Mail)
+    pytest.driver.find_element(By.ID, 'password').send_keys(Pass)
+    pytest.driver.find_element(By.ID, 'kc-login').click()
+
+
 
