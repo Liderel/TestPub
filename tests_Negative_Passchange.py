@@ -115,16 +115,17 @@ def test_incorect_passchange_nolatin(Rostelecom):
     pytest.driver.find_element(By.ID, 'forgot_password').click()
     pytest.driver.find_element(By.ID, 't-btn-tab-mail').click()
     pytest.driver.find_element(By.ID, 'username').send_keys(otvet)
+    # Время для капчи
     time.sleep(20)
     pytest.driver.find_element(By.ID, 'reset').click()
 
-    time.sleep(10)
+    time.sleep(30)
 
     response = requests.get(f'https://www.1secmail.com/api/v1/?action=getMessages&login={login}&domain={domain}')
 
     messages = response.json()
 
-    time.sleep(10)
+    time.sleep(5)
 
     meskey = messages[0]['id']
     print(meskey)
@@ -165,13 +166,13 @@ def test_incorect_passchange_nonumbers(Rostelecom):
     time.sleep(20)
     pytest.driver.find_element(By.ID, 'reset').click()
 
-    time.sleep(10)
+    time.sleep(30)
 
     response = requests.get(f'https://www.1secmail.com/api/v1/?action=getMessages&login={login}&domain={domain}')
 
     messages = response.json()
 
-    time.sleep(10)
+    time.sleep(5)
 
     meskey = messages[0]['id']
     print(meskey)
@@ -213,13 +214,13 @@ def test_incorect_passchange_tolong(Rostelecom):
     time.sleep(20)
     pytest.driver.find_element(By.ID, 'reset').click()
 
-    time.sleep(10)
+    time.sleep(30)
 
     response = requests.get(f'https://www.1secmail.com/api/v1/?action=getMessages&login={login}&domain={domain}')
 
     messages = response.json()
 
-    time.sleep(10)
+    time.sleep(5)
 
     meskey = messages[0]['id']
     print(meskey)
@@ -264,13 +265,13 @@ def test_incorect_passchange_on_actual(Rostelecom):
     time.sleep(20)
     pytest.driver.find_element(By.ID, 'reset').click()
 
-    time.sleep(10)
+    time.sleep(30)
 
     response = requests.get(f'https://www.1secmail.com/api/v1/?action=getMessages&login={login}&domain={domain}')
 
     messages = response.json()
 
-    time.sleep(10)
+    time.sleep(5)
 
     meskey = messages[0]['id']
     print(meskey)

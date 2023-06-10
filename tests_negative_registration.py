@@ -33,7 +33,7 @@ def test_Incorrect_Pass_Confirm_registration(Rostelecom):
     # Нажатие Регистрироваться
     pytest.driver.find_element(By.NAME, 'register').click()
 
-    error_mess = pytest.driver.find_element(By.CSS_SELECTOR, 'rt-input-container__meta.rt-input-container__meta--error')
+    error_mess = pytest.driver.find_element(By.CSS_SELECTOR, '.rt-input-container__meta.rt-input-container__meta--error')
 
     assert error_mess.text == 'Пароли не совпадают'
 

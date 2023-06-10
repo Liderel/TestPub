@@ -12,20 +12,25 @@ from settings import *
 def test_incorrect_autorizationall(Rostelecom):
     pytest.driver.find_element(By.ID, 'username').send_keys('v9nvas7mmj@kzccv.com') # Невалидная почта
     pytest.driver.find_element(By.ID, 'password').send_keys('Test00006') # Невалидный пароль
-    pytest.driver.find_element(By.ID, 'kc-login').click
-    WebDriverWait(pytest.driver, 10).until(
-        EC.presence_of_element_located((By.ID, 'form-error-message'))
-    )
 
-    assert pytest.driver.find_elemet(By.ID, 'form-error-message')
+    if (pytest.driver.find_elements(By.ID, 'captcha')):
+        time.sleep(20)
+    else:
+        pass
+    pytest.driver.find_element(By.ID, 'kc-login').click()
+
+    error_mess = pytest.driver.find_element(By.ID, 'form-error-message')
+
+    assert error_mess.text == 'Неверный логин или пароль'
 
 
 def test_incorrect_autorizationapass(Rostelecom):
     pytest.driver.find_element(By.ID, 'username').send_keys('ip90m9mpc@qiott.com') # Валидная почта
     pytest.driver.find_element(By.ID, 'password').send_keys('Test00006') # Невалидный пароль
-    pytest.driver.find_element(By.ID, 'kc-login').click
-    WebDriverWait(pytest.driver, 10).until(
-        EC.presence_of_element_located((By.ID, 'form-error-message'))
-    )
+    # Время ожидание на случай необходимости ввода кода с картинки
+    time.sleep(10)
+    pytest.driver.find_element(By.ID, 'kc-login').click()
 
-    assert pytest.driver.find_elemet(By.ID, 'form-error-message')
+    error_mess = pytest.driver.find_element(By.ID, 'form-error-message')
+
+    assert error_mess.text == 'Неверный логин или пароль'

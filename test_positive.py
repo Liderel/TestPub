@@ -69,7 +69,7 @@ def test_registration(Rostelecom):
 
     messages = response.json()
 
-    time.sleep(25)
+    time.sleep(5)
 
 
     meskey = messages[0]['id']
@@ -90,16 +90,23 @@ def test_registration(Rostelecom):
         pytest.driver.find_element(By.ID, f'rt-code-{i}').send_keys(x)
 
     time.sleep(5)
+
+
     print(otvet)
 
-    return otvet
 
 def test_autorization(Rostelecom):
+    # МОЖЕТ ПОТРЕБОВАТЬСЯ ВВОД КАПЧИ
     with open('mail.txt', 'r', encoding='UTF-8') as data_in:
         otvet = data_in.read()
     pytest.driver.find_element(By.ID, 't-btn-tab-mail').click()
     pytest.driver.find_element(By.ID, 'username').send_keys(otvet)
     pytest.driver.find_element(By.ID, 'password').send_keys(Pass)
+    # Время для ввода капчи
+    if (pytest.driver.find_elements(By.ID, 'captcha')):
+        time.sleep(20)
+    else:
+        pass
     pytest.driver.find_element(By.ID, 'kc-login').click()
 
     assert pytest.driver.find_element(By.CLASS_NAME, 'user-avatar')
@@ -119,13 +126,13 @@ def test_pass_change(Rostelecom):
     time.sleep(20)
     pytest.driver.find_element(By.ID, 'reset').click()
 
-    time.sleep(10)
+    time.sleep(30)
 
     response = requests.get(f'https://www.1secmail.com/api/v1/?action=getMessages&login={login}&domain={domain}')
 
     messages = response.json()
 
-    time.sleep(10)
+    time.sleep(5)
 
     meskey = messages[0]['id']
     print(meskey)
@@ -144,15 +151,26 @@ def test_pass_change(Rostelecom):
     for i, x in enumerate(messaglist):
         pytest.driver.find_element(By.ID, f'rt-code-{i}').send_keys(x)
 
-    time.sleep(15)
+    time.sleep(5)
 
     pytest.driver.find_element(By.ID, 'password-new').send_keys(newpass)
 
     pytest.driver.find_element(By.ID, 'password-confirm').send_keys(newpass)
 
+    time.sleep(3)
+
     pytest.driver.find_element(By.ID, 't-btn-reset-pass').click()
 
+    time.sleep(3)
+
     pytest.driver.find_element(By.ID, 'password').send_keys(newpass)
+
+    pytest.driver.find_element(By.ID, 'kc-login').click
+
+    time.sleep(10)
+
+
+
 
 
 
